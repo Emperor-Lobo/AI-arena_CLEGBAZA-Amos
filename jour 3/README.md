@@ -149,7 +149,7 @@ SVM chute de 9.5 points sans scaling. RandomForest non affecté — les arbres s
 ## Leçons clés Jour 3 (phase 0 à phase D)
 
 1. **L'accuracy seule ment** sur des classes déséquilibrées. Toujours regarder precision/recall/F1.
-2. **KMeans exige une standardisation** obligatoire avant usage — une colonne à grande échelle écrase toutes les autres dans le calcul de distance.
-3. **Le SVM brille sur peu de données / beaucoup de variables** — dataset sonar : 208 lignes, 60 features, 92.86% de F1.
-4. **Les entrées hors plage sont dangereuses** — un modèle linéaire extrapole sans garde-fou (prix immobilier négatif), un modèle de classification prédit avec assurance sur un signal nul.
-5. **Le bag-of-words est monolingue** — un modèle entraîné sur de l'anglais ne détecte pas les spams en français.
+2. **KMeans exige une standardisation** obligatoire avant usage; une colonne à grande échelle écrase toutes les autres dans le calcul de distance.
+3. **Le SVM brille sur peu de données / beaucoup de variables**; dataset sonar : 208 lignes, 60 features, 92.86% de F1.
+4. **Les entrées hors plage sont dangereuses**. Un modèle linéaire extrapole sans garde-fou (prix immobilier négatif), un modèle de classification prédit avec assurance sur un signal nul.
+5. **Le bag-of-words est monolingue**. Un modèle entraîné sur de l'anglais ne détecte pas les spams en français.
