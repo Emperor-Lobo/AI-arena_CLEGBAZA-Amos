@@ -23,14 +23,14 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
 
 ## Décisions de nettoyage et justifications
 
-### Phase 1 — Audit qualité
+### Phase 1: Audit qualité
 - Cible déséquilibrée : **73.5% Non / 26.5% Oui**
 - Ce déséquilibre piégera l'accuracy : un modèle qui répond
   toujours "Non" fait déjà 73.5% sans rien apprendre.
 - Aucun manquant visible au premier regard — mais des trous
   cachés existent (voir Phase 2).
 
-### Phase 2 — Colonne piégée TotalCharges
+### Phase 2: Colonne piégée TotalCharges
 - `TotalCharges` stockée en `object` au lieu de `float64`.
 - Cause : 11 lignes contiennent un espace `" "` au lieu d'un nombre.
 - **Décision : imputation par médiane** plutôt que suppression.
@@ -38,7 +38,7 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
   Les supprimer ne changerait rien statistiquement, mais
   l'imputation est plus propre et ne perd aucune information.
 
-### Phase 3 — Encodage des catégorielles
+### Phase 3: Encodage des catégorielles
 - **Colonnes binaires Yes/No** : encodées en 0/1 directement
   (1 colonne), pas en One-Hot (2 colonnes).
   Le One-Hot sur du binaire est redondant car la 2e colonne
@@ -51,7 +51,7 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
 - **customerID : supprimé** — identifiant unique, pas une feature.
   Si encodé en One-Hot : 7043 colonnes créées = explosion de dimensions.
 
-### Phase 4 — Valeurs aberrantes
+### Phase 4: Valeurs aberrantes
 - **Aucun outlier détecté** sur `tenure`, `MonthlyCharges`,
   `TotalCharges` (règle IQR).
 - Les valeurs extrêmes sont des cas réels (gros clients fidèles
@@ -61,7 +61,7 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
   (ex: `SeniorCitizen`) — la fonction le détecte et refuse
   de calculer.
 
-### Phase 5 — Multicolinéarité
+### Phase 5: Multicolinéarité
 - `TotalCharges` corrélée à `tenure` (0.83) et
   `MonthlyCharges` (0.65) → VIF = 8.1 (> seuil de 5).
 - `tenure` avait un VIF = 6.3 à cause de cette redondance.
@@ -71,7 +71,7 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
   Après suppression, les VIF de tenure et MonthlyCharges
   tombent en dessous de 5.
 
-### Phase 6 — Features discriminantes
+### Phase 6: Features discriminantes
 - Les deux méthodes (corrélation + Random Forest) s'accordent
   sur le podium : **Contract, tenure, MonthlyCharges**.
 - `MonthlyCharges` : fort en Random Forest (0.236) mais modéré
@@ -86,7 +86,7 @@ Dataset : 7043 clients, 21 colonnes, cible : `Churn` (Oui/Non).
   de façon non linéaire.
 - Levier : fidéliser tôt et proposer des contrats longs.
 
-### Phase 7 — Split, scaling, et data leakage
+### Phase 7: Split, scaling, et data leakage
 - **Règle d'or** : le scaler et l'imputer s'ajustent TOUJOURS
   sur le train seul, jamais sur le test.
 - Version honnête vs triche : delta de 0.21% sur ce dataset
