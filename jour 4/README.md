@@ -8,7 +8,7 @@
 ### Phase 0 : Mise en route
 Setup du notebook, imports, vérification des dépendances.
 
-### Phase 1 : Séparer les données proprement — train / validation / test
+### Phase 1 : Séparer les données proprement en train / validation / test
 Découpage en 3 jeux distincts avec stratification. Le test ne se touche qu'une seule fois, tout à la fin.
 
 ### Phase 2 : Bootstrap et bagging
@@ -32,7 +32,7 @@ Random Forest vs PMC Keras en validation croisée. SGD vs Adam. Leaderboard de l
 ---
 
 ## Dataset
-`load_breast_cancer` (scikit-learn) — 569 patients, 30 features, classification binaire : tumeur maligne (0) ou bénigne (1).
+`load_breast_cancer` (scikit-learn): 569 patients, 30 features, classification binaire : tumeur maligne (0) ou bénigne (1).
 
 ---
 
